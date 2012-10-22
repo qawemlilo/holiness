@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0" method="upgrade">
+    <name>RecentDevotions</name>
+    <author>Qawelesizwe Mlilo</author>
+    <authorEmail>qawemlilo@gmail.com</authorEmail>
+    <authorUrl>http://qawemlilo.rflab.co.za/</authorUrl>
+    <license>GPL/GNU</license>
+    <version>1.0.0</version>
+    <description>Recent Devotions</description>
+
+    <files>
+        <filename>mod_recentdevotions.xml</filename>
+        <filename module="mod_recentdevotions">mod_recentdevotions.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+    </files>
+    
+    <params>
+	    <param name="limit" type="text" default="10" label="Recent Devotions Limit" description="Recent Devotions Limit" />		
+    </params>
+</install>

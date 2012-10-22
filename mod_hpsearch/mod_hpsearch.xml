@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0" method="upgrade">
+    <name>HPsearch</name>
+    <author>Qawelesizwe Mlilo</author>
+    <authorEmail>qawemlilo@gmail.com</authorEmail>
+    <authorUrl>http://qawemlilo.rflab.co.za/</authorUrl>
+    <license>GPL/GNU</license>
+    <version>1.0.0</version>
+    <description>Holiness Page search</description>
+
+    <files>
+        <filename>mod_hpsearch.xml</filename>
+        <filename module="mod_hpsearch">mod_hpsearch.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+        <folder>files</folder>
+    </files>
+    
+    <params>
+	    <param name="limit" type="text" default="5" label="Search Results Limit" description="Search Results Limit" />		
+    </params>
+</install>
