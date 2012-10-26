@@ -208,30 +208,6 @@ class DevotionsController extends JController {
         }
     }
     
-    function updateMe() {
-    /*
-        $db =& JFactory::getDBO();
-        $f = JPATH_COMPONENT . DS . 'files' .  DS . 'users';
-        $prev = null;
-        
-        $files = JFolder::files($f);
-        
-
-        foreach ($files as $file) {
-          $pos = strpos($file, '_');
-          if($pos > 0) {
-            $num = substr($file, $pos + 1);
-            $num = explode('.', $num);
-            $id = (int)trim($num[0]);
-            
-            if ($id != $prev) {
-                $this->_updateImg($id, $file);
-                $prev = $id;
-            }  
-          }
-        }
-    */
-    }
     
     function _updateImg($id, $img) {
         $db =& JFactory::getDBO();
