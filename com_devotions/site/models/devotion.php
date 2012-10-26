@@ -132,4 +132,16 @@ class DevotionsModelDevotion extends JModel
 
         return $results;
     }
+    
+    
+    function getBlessings($did)
+    {
+        $db =& JFactory::getDBO();
+        $query = "SELECT * FROM #__blessings WHERE devotionid='$did' ORDER BY ts DESC";
+        $db->setQuery($query); 
+        
+        $results = $db->loadObjectList();
+
+        return $results;
+    }
 }

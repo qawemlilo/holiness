@@ -3,7 +3,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport( 'joomla.application.component.model' );
 
-class DevotionsModelNewdevotion extends JModel
+class DevotionsModelBlessing extends JModel
 {
     var $_total = null;
     
@@ -126,18 +126,6 @@ class DevotionsModelNewdevotion extends JModel
     {
         $db =& JFactory::getDBO();
         $query = "SELECT * FROM #__devotions WHERE pastor='$pid' ORDER BY ts DESC LIMIT 10";
-        $db->setQuery($query); 
-        
-        $results = $db->loadObjectList();
-
-        return $results;
-    }
-    
-    
-    function getBlessings($did)
-    {
-        $db =& JFactory::getDBO();
-        $query = "SELECT * FROM #__blessings WHERE devotionid='$did' ORDER BY ts DESC";
         $db->setQuery($query); 
         
         $results = $db->loadObjectList();
