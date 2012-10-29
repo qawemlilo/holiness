@@ -261,4 +261,9 @@
             }
         }, 'json');       
     });
+    
+    
+    $(function () {
+        myfancy();
+    });
 }(window, jQuery));
