@@ -134,14 +134,55 @@ class DevotionsModelDevotion extends JModel
     }
     
     
+    function giveBlessings($did, $pid)
+    {
+        if ($this->checkIfBlessingExists($did, $pid)) {
+            return false;
+        }
+        
+        $db =& JFactory::getDBO();
+        $query = "INSERT INTO #__blessings (`devotionid`, `pastorid`) VALUES ($did, $pid)";
+        $db->setQuery($query); 
+        
+        $results = $db->query();
+
+        return $results;
+    }
+    
+    
+    function checkIfBlessingExists($did, $pid)
+    {
+        $db =& JFactory::getDBO();
+        $query = "SELECT id FROM #__blessings WHERE devotionid=$did AND pastorid=$pid";
+        $db->setQuery($query); 
+        
+        $result = $db->loadResult();
+
+        return $result;
+    }
+    
+    
     function getBlessings($did)
     {
         $db =& JFactory::getDBO();
-        $query = "SELECT * FROM #__blessings WHERE devotionid='$did' ORDER BY ts DESC";
+        $query = "SELECT id, pastorid FROM #__blessings WHERE devotionid='$did' ORDER BY ts DESC";
         $db->setQuery($query); 
         
         $results = $db->loadObjectList();
+        
+        $blessings = array();
+        
+        if (is_array($results) && count($results) > 0) {
+            foreach($results as $blessing) {
+                $pastor = $this->getPastor($blessing->pastorid);
+                $blessing->username = $pastor->name;
+                $blessings[] = $blessing;
+            }
+        }
+        else {
+            $blessings = false;
+        }
 
-        return $results;
+        return $blessings;
     }
 }

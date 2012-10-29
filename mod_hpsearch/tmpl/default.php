@@ -3,7 +3,6 @@ defined('_JEXEC') or die('Restricted access'); // no direct access
 
 $document = &JFactory::getDocument();
 $document->addStyleSheet('modules/mod_hpsearch/files/css/ui-lightness/jquery-ui-1.8.18.custom.css');
-$document->addScript('modules/mod_hpsearch/files/js/jquery-1.7.1.min.js');
 $document->addScript('modules/mod_hpsearch/files/js/jquery-ui-1.8.18.custom.min.js');
 ?>
 
