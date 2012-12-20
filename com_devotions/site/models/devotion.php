@@ -136,10 +136,6 @@ class DevotionsModelDevotion extends JModel
     
     function giveBlessings($did, $pid)
     {
-        if ($this->checkIfBlessingExists($did, $pid)) {
-            return false;
-        }
-        
         $db =& JFactory::getDBO();
         $query = "INSERT INTO #__blessings (`devotionid`, `pastorid`) VALUES ($did, $pid)";
         $db->setQuery($query); 

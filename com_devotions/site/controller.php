@@ -2,8 +2,6 @@
 defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.application.component.controller');
-$document = &JFactory::getDocument();
-$document->addScript('modules/mod_hpsearch/files/js/jquery-1.7.1.min.js');
 
 require_once(JPATH_COMPONENT .DS.'models'.DS.'tables'.DS.'devotion.php');
 require_once(JPATH_COMPONENT .DS.'models'.DS.'tables'.DS.'pastor.php');

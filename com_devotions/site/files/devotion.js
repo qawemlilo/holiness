@@ -20,28 +20,26 @@
     
     
         init: function (data) {
-            $(function() {
-               var  totalPages = Math.ceil(data.length/Pagination.perPage);
+            var  totalPages = Math.ceil(data.length/Pagination.perPage);
             
-                if (totalPages > 1) {
-                    Pagination.totalPages = totalPages;
-                }
-                else {
-                    Pagination.totalPages = 1;
-                    $(Pagination.pagenationDiv).hide();
-                }
+             if (totalPages > 1) {
+                 Pagination.totalPages = totalPages;
+            }
+            else {
+                Pagination.totalPages = 1;
+                $(Pagination.pagenationDiv).hide();
+            }
             
-                Pagination.data = data; 
+            Pagination.data = data; 
             
-                Pagination.goToPage(0);
-            });                
+            Pagination.goToPage(0);            
         },
     
     
         next: function () {
             var new_page = Pagination.currentPage + 1;
         
-            if (new_page <= Pagination.totalPages) {
+            if (new_page < Pagination.totalPages) {
                 Pagination.goToPage(new_page);
             }
         },
@@ -72,12 +70,14 @@
         
             html += '<strong><a class="next_link" href="javascript:next();">Next</a></strong>';
         
-            $(Pagination.pagenationDiv).html(html);
+            $(Pagination.pagenationDiv).fadeOut('slow', function() {
+                $(Pagination.pagenationDiv).html(html).fadeIn('slow');
+            });
         },
     
     
         unorderedList: function (user) {
-            var item, link = '<a href="http://holinesspage.com/index.php/devotions?view=devotions&pid=' + user.pastorid + '">' + user.username + '</a>';
+            var item, link = '<a href="http://www.holinesspage.com/index.php?option=com_devotions&view=devotions&pid=' + user.pastorid + '">' + user.username + '</a>';
     
             link += ' is truly blessed by this devotion';
     
@@ -111,7 +111,9 @@
             this.currentPage = page;
             this.pager();
         
-            $(this.contentDiv).html(container);
+            $(this.contentDiv).fadeOut('slow', function() {
+                $(this.contentDiv).html(container).fadeIn('slow');
+            });
         }    
     };
     
@@ -130,7 +132,9 @@
     };
     
     window.blessingButton = function (data) {
-        Pagination.init(data);
+        $(function () {
+            Pagination.init(data);
+        });
     };	
  
 
@@ -222,7 +226,17 @@
     window.blessMe = function (devotionId, pastorId) {
         $.post('index.php?option=com_devotions&task=blessMe', {did: devotionId, pid: pastorId}, function (res) {
             if (res === 'success') {
-                location.reload(true);
+                var name = document.forms.commentForm.name.value,
+                userObj = {id: pastorId, pastorid: pastorId, username: name}, user;
+                alert(Pagination.data.length);
+                if (Pagination.data.length > 0) {
+                    user = Pagination.unorderedList(userObj);
+                    Pagination.data.unshift(userObj);
+                    $("#blessingsDiv").find('ul').prepend(user);
+                }
+                else {
+                    Pagination.init([userObj]);
+                }
             }
             else {
               var q = '';
@@ -230,7 +244,11 @@
         });
     };
     
-    $("#mydevotion").submit(function (e) {
+    
+    $(function () {
+        myfancy();
+        
+        $("#mydevotion").submit(function (e) {
         e.preventDefault();
             
         var THIS = this,
@@ -260,10 +278,6 @@
                 }, 10 * 1000);           
             }
         }, 'json');       
-    });
-    
-    
-    $(function () {
-        myfancy();
+        });
     });
 }(window, jQuery));
