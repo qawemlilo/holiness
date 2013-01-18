@@ -9,8 +9,6 @@ class ModHPsearchHelper
     private $results = null;
     private $resultsObj = null;
 
-    function __constuctor() { 
-    }
     
     public function getPastorsArray()
     {
@@ -30,8 +28,6 @@ class ModHPsearchHelper
     
     public function getPastorsObj()
     {
-        $obj = '{';
-        
         if (!$this->resultsObj) {
 		    $db =& JFactory::getDBO();       
         
@@ -40,11 +36,9 @@ class ModHPsearchHelper
         
             $db->setQuery($query); 
         
-            $this->resultsObj = $db->loadObjectList();
+            $this->resultsObj = $db->loadAssocList('name');
         }
-
-		foreach ($this->resultsObj as $pastor) {
-            $obj .= '"' . $pastor->name . '": "' . $pastor->id . '",'; 
-        }
+        
+        return $this->resultsObj;
     }
 }

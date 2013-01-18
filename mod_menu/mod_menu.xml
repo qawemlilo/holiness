@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0" method="upgrade">
+    <name>User menu</name>
+    <author>Qawelesizwe Mlilo</author>
+    <authorEmail>qawemlilo@gmail.com</authorEmail>
+    <authorUrl>http://qawemlilo.rflab.co.za/</authorUrl>
+    <license>GPL/GNU</license>
+    <version>1.5.0</version>
+    <description>User menu</description>
+
+    <files>
+        <filename>mod_menu.xml</filename>
+        <filename module="mod_menu">mod_menu.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+    </files>
+    <params>
+	    <param name="showDivineCall" type="radio" default="1" label="Show Divine Call" description="Show Divine Call">
+		  <option value="1">Yes</option>
+		  <option value="0">No</option>
+	    </param>		
+    </params>
+</install>

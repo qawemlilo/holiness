@@ -11,13 +11,18 @@ jQuery.noConflict();
 (function ($) {
 	$(function() {
 		var availableTags = <?php echo json_encode($pastorsArr); ?>;
+        var pastorsObj = <?php echo json_encode($pastorsObj); ?>;
         
 		$("#mod_search_searchword").autocomplete({
 			source: availableTags,
             
             select: function(event, ui) {
-                $(this).val(ui.item.value);
-                $("#mod_hpsearch #submit").click();
+                var name = ui.item.value, url = 'http://www.holinesspage.com/index.php?option=com_devotions&view=profile&pid=';
+                
+                if (pastorsObj.hasOwnProperty(name)) {
+                    url = url + pastorsObj[name].id;
+                    window.location.href = url;                    
+                }
             }
 		});
 	});
