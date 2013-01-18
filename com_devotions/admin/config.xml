@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<params>
+		<param name="devotions_limit" type="text" default="10" label="Devotions limit" description="Devotions limit" />
+	</params>
+</config>
