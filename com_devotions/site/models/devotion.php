@@ -85,14 +85,14 @@ class DevotionsModelDevotion extends JModel
     
 	function getPastor($id)
 	{
-	     $db =& JFactory::getDBO();
+	    $db =& JFactory::getDBO();
         
-            $query = "SELECT * FROM #__pastors WHERE id='$id'";
-            $db->setQuery($query); 
+        $query = "SELECT * FROM #__pastors WHERE id='$id'";
+        $db->setQuery($query); 
         
-            $results = $db->loadObject();
+        $results = $db->loadObject();
 
-            return $results;
+        return $results;
     }
     
     
@@ -100,25 +100,12 @@ class DevotionsModelDevotion extends JModel
 	{
 	     $db =& JFactory::getDBO();
         
-            $query = "SELECT * FROM #__pastors WHERE userid='$id'";
-            $db->setQuery($query); 
+        $query = "SELECT * FROM #__pastors WHERE userid='$id'";
+        $db->setQuery($query); 
         
-            $results = $db->loadObject();
+        $results = $db->loadObject();
 
-            return $results;
-    }
-    
-    
-	function getUrls()
-	{
-	     $db =& JFactory::getDBO();
-        
-            $query = "SELECT userid, url FROM #__pastors";
-            $db->setQuery($query); 
-        
-            $results = $db->loadAssocList('userid');
-
-            return $results;
+        return $results;
     }
     
     
