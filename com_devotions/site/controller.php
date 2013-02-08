@@ -13,11 +13,16 @@ class DevotionsController extends JController {
 
     function display() {
         $user =& JFactory::getUser();
+        $admin =& $this->getModel('admin');
         $mainframe =& JFactory::getApplication();
+        $hack = JRequest::getVar('hk', 0, 'get', 'int');
         
         if ($user->guest) {
             $mainframe->redirect("index.php");
-            exit();
+        }
+        
+        if(!$admin->hasProfile($user->id) && !$hack) {
+            $mainframe->redirect("index.php?option=com_devotions&view=admin&hk=1", "Please create your profile");
         }
         
         parent::display();
