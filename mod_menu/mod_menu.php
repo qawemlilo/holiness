@@ -6,6 +6,6 @@ require_once(dirname(__FILE__).DS.'helper.php');
 $user =& JFactory::getUser();
 
 $items = ModMenuHelper::getMenuItems($params);
-$pid = ModMenuHelper::getPastorId($user->id);
+$pastor = ModMenuHelper::getPastor($user->id);
 
 require(JModuleHelper::getLayoutPath('mod_menu'));

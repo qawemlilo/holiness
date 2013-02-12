@@ -47,8 +47,45 @@ class DevotionsController extends JController {
         } 
     }
     
+    public function autofill_tags()
+    {
+        $db =& JFactory::getDBO();       
+        $query = "SELECT id, name FROM #__pastors";   
+
+        $db->setQuery($query); 
+        
+        $resultsObj = $db->loadAssocList('name');
+        
+        $result = json_encode($resultsObj);
+        
+        echo $result;
+        
+        exit();
+    }
+    
+    
+    
+    public function autofill_database()
+    {
+        $db =& JFactory::getDBO();       
+        
+        $query = "SELECT name FROM #__pastors ORDER BY name";   
+     
+        
+        $db->setQuery($query); 
+        
+        $results = $db->loadResultArray();
+     
+
+		echo json_encode($results);
+        
+        exit();
+    }
+    
+    
+    
     function comment() {
-        JRequest::checkToken() or jexit( 'Invalid Token' );
+        JRequest::checkToken() or jexit('Invalid Token');
         
         JTable::addIncludePath(JPATH_COMPONENT . DS . 'models' . DS . 'tables');
         
@@ -85,6 +122,8 @@ class DevotionsController extends JController {
             $mainframe->redirect($refer, "Error occured! Please name sure that you have filled in all required fields.", "error");
         }
     }
+    
+    
     
     function comment_delete() {
         $user =& JFactory::getUser();
@@ -171,7 +210,7 @@ class DevotionsController extends JController {
             $body .= "This devotion was shared with you by: $from_name from the HOLINESS PAGE website." . "\n \n";
             $body .= $theme . "\n \n";
             $body .= $msg . "\n \n";
-            $body .= "Please visit this page to read your message: $url";
+            $body .= "Please visit this page to read your message: " . $url;
             
             $mailsent = $this->sendMail($from, $to_email, $subject, $body);
            

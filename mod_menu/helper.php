@@ -11,8 +11,8 @@ class ModMenuHelper
         $user =& JFactory::getUser();
         $db =& JFactory::getDBO();
         
-        $pid = getPastorId($user->id);
-        $num_requests = getRequests($pid);
+        $pastor = getPastor($user->id);
+        $num_requests = getRequests($pastor->id);
         $items = '';
         
         if(!$user->guest) {
@@ -27,14 +27,12 @@ class ModMenuHelper
         return $items;
     }
     
-    function getPastorId($userid) 
+    
+    function getPastor($userid) 
     {
-        $db =& JFactory::getDBO();
-        
-        $query = "SELECT id FROM #__pastors WHERE userid=$userid ";
-        $db->setQuery($query); 
+        $result = getPastor($userid); 
 
-        return $db->loadResult();
+        return $result;
     }
 }
 
@@ -55,12 +53,12 @@ function getRequests($pid)
     }
 }
     
-function getPastorId($userid) 
+function getPastor($userid) 
 {
     $db =& JFactory::getDBO();
         
-    $query = "SELECT id FROM #__pastors WHERE userid=$userid ";
+    $query = "SELECT * FROM #__pastors WHERE userid=$userid ";
     $db->setQuery($query); 
 
-    return $db->loadResult();
+    return $db->loadObject();
 }
